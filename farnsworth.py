@@ -68,7 +68,7 @@ class layer():
   def set_pixel( self, x, y, rgb_color ):
     if self.in_bounds(x,y):
       real_color = self.translate_color( rgb_color )
-      if self._data[y][x] <> real_color:
+      if self._data[y][x] != real_color:
         self._data[y][x] = real_color
         self._dirty = True
 
@@ -145,7 +145,7 @@ class layer():
 
     for y in range(0,self._height):
       for x in range(0,self._width):
-        if (not alpha or alpha[(x,y)] > 0) and (not xparent_color or (xparent_color <> pixels[x,y])):
+        if (not alpha or alpha[(x,y)] > 0) and (not xparent_color or (xparent_color != pixels[x,y])):
           self.set_pixel(x, self._height - (y+1), pixels[(x,y)])
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -179,7 +179,7 @@ class layer():
 
     for x in range(self._width):
       for y in range(self._height):
-        if (not black_xparent) or ( self._data[y][x] <> constants.COLORS['BLACK'] ):
+        if (not black_xparent) or ( self._data[y][x] != constants.COLORS['BLACK'] ):
           destination_layer.set_pixel( dx + x, dy + y, self._data[y][x] )
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -203,7 +203,7 @@ class layer():
 
     font = constants.FONTS[font_name]
 
-    if glyph <> ' ':
+    if glyph != ' ':
 	  
       if x == 'CENTER':
         width = self.glyph_width(font_name, glyph)
@@ -354,7 +354,7 @@ class sign():
   def register(self):
 
     for setting in [self._provides_logo, self._is_dynamic, self._preferred_duration]:
-      print setting
+      print(setting)
     sys.exit()
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -633,14 +633,14 @@ class sprite(layer):
     self._dest_x = x
     self._dest_y = y
     
-    if self._dest_x <> self._x:
+    if self._dest_x != self._x:
       self._x_inc = (self._dest_x - self._x) / framecount
       #if self._x_inc > 0 and self._x_inc < 1:
       #  self._x_inc = 1
       #elif self._x_inc < 0 and self._x_inc > -1:
       #  self._x_inc = -1
     
-    if self._dest_y <> self._y:
+    if self._dest_y != self._y:
       self._y_inc = (self._dest_y - self._y) / framecount
       #if self._y_inc > 0 and self._y_inc < 1:
       #  self._y_inc = 1
